@@ -1,5 +1,3 @@
-# Project 48 - Dimensionality Reduction (PCA & t-SNE Visualization)
-
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_digits
 from sklearn.decomposition import PCA

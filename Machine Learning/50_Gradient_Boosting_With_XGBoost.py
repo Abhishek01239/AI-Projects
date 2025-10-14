@@ -1,18 +1,13 @@
-# Project 50 - Gradient Boosting with XGBoost
-
 import xgboost as xgb
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-# 1. Load dataset
 data = load_breast_cancer()
 X, y = data.data, data.target
 
-# 2. Split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# 3. Create XGBoost classifier
 model = xgb.XGBClassifier(
     n_estimators=200,
     learning_rate=0.05,
@@ -24,13 +19,10 @@ model = xgb.XGBClassifier(
     eval_metric='logloss'
 )
 
-# 4. Train model
 model.fit(X_train, y_train)
 
-# 5. Predict
 y_pred = model.predict(X_test)
 
-# 6. Evaluate
 acc = accuracy_score(y_test, y_pred)
 print(f"XGBoost Accuracy: {acc*100:.2f}%")
 print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
