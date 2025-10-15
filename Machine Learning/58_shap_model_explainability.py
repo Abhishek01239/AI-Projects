@@ -5,29 +5,23 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
-# Load dataset
 data = load_wine()
 X, y = data.data, data.target
 feature_names = data.feature_names
 
-# Split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Train Random Forest
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 
-# Accuracy
-print("✅ Accuracy:", accuracy_score(y_test, model.predict(X_test)))
+print(" Accuracy:", accuracy_score(y_test, model.predict(X_test)))
 
-# SHAP Explainer
+#  Explainer
 explainer = shap.TreeExplainer(model)
 shap_values = explainer.shap_values(X_test)
 
-# --- Summary Plot ---
 shap.summary_plot(shap_values, X_test, feature_names=feature_names)
 
-# --- Force Plots for All Classes (Saved as HTML) ---
 sample_index = 0
 sample = pd.DataFrame([X_test[sample_index]], columns=feature_names)
 
@@ -39,4 +33,4 @@ for class_idx, class_shap_values in enumerate(shap_values):
     )
     filename = f"shap_force_plot_class_{class_idx}.html"
     shap.save_html(filename, shap_html)
-    print(f"✅ Saved force plot for class {class_idx} → {filename}")
+    print(f" Saved force plot for class {class_idx} → {filename}")
