@@ -1,0 +1,4 @@
+Scaler,Accuracy
+StandartScaler,0.3888888888888889
+MinMaxScaler,0.3888888888888889
+Normalizer,0.3888888888888889
